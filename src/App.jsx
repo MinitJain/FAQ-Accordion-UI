@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "./App.css";
-import Accordion from "./Components/Accordian/Accodrian";
+import Accordion from "./Components/Accodrion";
 
 function App() {
   return (
