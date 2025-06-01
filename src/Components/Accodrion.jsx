@@ -4,7 +4,7 @@ import data from "./data";
 const Accordion = () => {
   const [selected, setSelected] = useState(null);
   const [enableMultiSelection, setenableMultiSelection] = useState(false);
-  const [multiple, setMulitple] = useState([]);
+  const [multiple, setMultiple] = useState([]);
 
   const handleSingleSelection = (getID) => {
     setSelected(getID === selected ? null : getID);
@@ -17,11 +17,12 @@ const Accordion = () => {
     console.log(findIndexOfCurrentId);
     if (findIndexOfCurrentId === -1) {
       copyMultiple.push(getID);
+      setSelected(selected);
     } else {
       copyMultiple.splice(findIndexOfCurrentId, 1);
     }
 
-    setMulitple(copyMultiple);
+    setMultiple(copyMultiple);
   };
 
   return (
@@ -39,7 +40,17 @@ const Accordion = () => {
                 className="title"
               >
                 <h3>{dataItem.question} </h3>
-                {selected === dataItem.id ? <span> - </span> : <span> + </span>}
+                {enableMultiSelection ? (
+                  multiple.includes(dataItem.id) ? (
+                    <span> - </span>
+                  ) : (
+                    <span> + </span>
+                  )
+                ) : selected === dataItem.id ? (
+                  <span> - </span>
+                ) : (
+                  <span> + </span>
+                )}
               </div>
               {enableMultiSelection
                 ? multiple.indexOf(dataItem.id) !== -1 && (
